@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Variáveis CSS Responsivas</title>
+    <style>
+        /* Definição das variáveis no :root */
+        :root {
+            /* Tamanhos de fonte */
+            --font-size-small: 1rem;
+            --font-size-medium: 1.2rem;
+            --font-size-large: 1.5rem;
+            
+            --h1-font-size-small: 2rem;
+            --h1-font-size-medium: 2.5rem;
+            --h1-font-size-large: 3rem;
+            
+            --h2-font-size-small: 1.5rem;
+            --h2-font-size-medium: 1.8rem;
+            --h2-font-size-large: 2.2rem;
+            
+            /* Espaçamentos */
+            --spacing-small: 0.5rem;
+            --spacing-medium: 1rem;
+            --spacing-large: 1.5rem;
+            
+            --section-spacing-small: 1.5rem;
+            --section-spacing-medium: 2.5rem;
+            --section-spacing-large: 4rem;
+            
+            /* Aplicação inicial para mobile first (telas pequenas) */
+            --current-font-size: var(--font-size-small);
+            --current-h1-font-size: var(--h1-font-size-small);
+            --current-h2-font-size: var(--h2-font-size-small);
+            --current-spacing: var(--spacing-small);
+            --current-section-spacing: var(--section-spacing-small);
+        }
+
+        /* Media query para tablets (telas médias) */
+        @media (min-width: 768px) {
+            :root {
+                --current-font-size: var(--font-size-medium);
+                --current-h1-font-size: var(--h1-font-size-medium);
+                --current-h2-font-size: var(--h2-font-size-medium);
+                --current-spacing: var(--spacing-medium);
+                --current-section-spacing: var(--section-spacing-medium);
+            }
+        }
+
+        /* Media query para desktops (telas grandes) */
+        @media (min-width: 1024px) {
+            :root {
+                --current-font-size: var(--font-size-large);
+                --current-h1-font-size: var(--h1-font-size-large);
+                --current-h2-font-size: var(--h2-font-size-large);
+                --current-spacing: var(--spacing-large);
+                --current-section-spacing: var(--section-spacing-large);
+            }
+        }
+
+        /* Estilos base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: var(--current-font-size);
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f7fa;
+            padding: var(--current-spacing);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--current-spacing);
+        }
+
+        header {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: white;
+            padding: var(--current-section-spacing);
+            border-radius: 10px;
+            margin-bottom: var(--current-section-spacing);
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: var(--current-h1-font-size);
+            margin-bottom: var(--current-spacing);
+        }
+
+        h2 {
+            font-size: var(--current-h2-font-size);
+            margin-bottom: var(--current-spacing);
+            color: #6e8efb;
+        }
+
+        p {
+            margin-bottom: var(--current-spacing);
+        }
+
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--current-spacing);
+            margin-bottom: var(--current-section-spacing);
+        }
+
+        .card {
+            flex: 1 1 300px;
+            background: white;
+            padding: var(--current-spacing);
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h3 {
+            color: #a777e3;
+            margin-bottom: var(--current-spacing);
+        }
+
+        .button {
+            display: inline-block;
+            background: #6e8efb;
+            color: white;
+            padding: calc(var(--current-spacing) * 0.75) var(--current-spacing);
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .button:hover {
+            background: #5a7de4;
+        }
+
+        footer {
+            text-align: center;
+            padding: var(--current-section-spacing);
+            background: #333;
+            color: white;
+            border-radius: 10px;
+        }
+
+        /* Tabela de variáveis para referência */
+        .variables-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: var(--current-section-spacing) 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .variables-table th, .variables-table td {
+            padding: var(--current-spacing);
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .variables-table th {
+            background: #6e8efb;
+            color: white;
+        }
+
+        .variables-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .size-indicator {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            z-index: 1000;
+        }
+
+        @media (max-width: 767px) {
+            .size-indicator::after {
+                content: "Pequena";
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .size-indicator::after {
+                content: "Média";
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .size-indicator::after {
+                content: "Grande";
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="size-indicator">Tamanho de tela: </div>
+    
+    <div class="container">
+        <header>
+            <h1>Variáveis CSS Responsivas</h1>
+            <p>Esta página demonstra o uso de variáveis CSS para criar um layout responsivo</p>
+        </header>
+
+        <main>
+            <section class="content">
+                <div class="card">
+                    <h2>Variáveis de Tamanho de Fonte</h2>
+                    <p>As variáveis CSS permitem que definamos valores de tamanho de fonte que se adaptam a diferentes tamanhos de tela.</p>
+                    <p>O tamanho atual do texto principal é: <strong>var(--current-font-size)</strong></p>
+                    <p>O tamanho atual do título H1 é: <strong>var(--current-h1-font-size)</strong></p>
+                    <p>O tamanho atual do título H2 é: <strong>var(--current-h2-font-size)</strong></p>
+                </div>
+
+                <div class="card">
+                    <h2>Variáveis de Espaçamento</h2>
+                    <p>Também utilizamos variáveis para espaçamentos, que se ajustam conforme o tamanho da tela.</p>
+                    <p>O espaçamento atual entre elementos é: <strong>var(--current-spacing)</strong></p>
+                    <p>O espaçamento atual entre seções é: <strong>var(--current-section-spacing)</strong></p>
+                    <a href="#" class="button">Saiba Mais</a>
+                </div>
+            </section>
+
+            <h2>Valores das Variáveis por Tamanho de Tela</h2>
+            <table class="variables-table">
+                <thead>
+                    <tr>
+                        <th>Variável</th>
+                        <th>Pequena (&lt;768px)</th>
+                        <th>Média (768px-1023px)</th>
+                        <th>Grande (&gt;1024px)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>--current-font-size</td>
+                        <td>1rem</td>
+                        <td>1.2rem</td>
+                        <td>1.5rem</td>
+                    </tr>
+                    <tr>
+                        <td>--current-h1-font-size</td>
+                        <td>2rem</td>
+                        <td>2.5rem</td>
+                        <td>3rem</td>
+                    </tr>
+                    <tr>
+                        <td>--current-h2-font-size</td>
+                        <td>1.5rem</td>
+                        <td>1.8rem</td>
+                        <td>2.2rem</td>
+                    </tr>
+                    <tr>
+                        <td>--current-spacing</td>
+                        <td>0.5rem</td>
+                        <td>1rem</td>
+                        <td>1.5rem</td>
+                    </tr>
+                    <tr>
+                        <td>--current-section-spacing</td>
+                        <td>1.5rem</td>
+                        <td>2.5rem</td>
+                        <td>4rem</td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+
+        <footer>
+            <p>Exemplo de uso de variáveis CSS com media queries</p>
+        </footer>
+    </div>
+</body>
+</html>
